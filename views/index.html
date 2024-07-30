@@ -28,6 +28,11 @@
 
     </header>
 
+    <!-- Dia -->
+    <div class="day">
+        <span id="date"></span>
+    </div>
+
     <!-- Relógio -->
     <div class="clock">
         <div class="hand hour" id="hour"></div>
@@ -130,7 +135,7 @@
 
             <textarea id="taskDescription" required></textarea>
 
-            <div id="statsBar"></div>
+            <button type="button" id="btUpdateTask" title="Update task">Update</button>
 
         </form>
 
@@ -142,15 +147,15 @@
 
         <form>
 
-            <label for="addtaskTitle">Title</label>
+            <label for="addtaskTitle">Title:</label>
 
             <input for="addtaskTitle" id="addtaskTitle" type="text">
 
-            <label for="addtaskDescription">Description</label>
+            <label for="addtaskDescription">Description:</label>
 
             <textarea for="addtaskDescription" id="addtaskDescription" type="text"></textarea>
 
-            <button type="button" id="btSubmitAddTask">Submit</button>
+            <button type="button" id="btSubmitAddTask" title="Submit task">Submit</button>
 
         </form>
 

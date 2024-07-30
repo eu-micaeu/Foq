@@ -144,7 +144,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                     statsBar.style.backgroundColor = "yellow";
                                 }
                                 statsBar.addEventListener("click", () => {
-                                    fetch('/task/' + task.task_id, {
+                                    fetch('/taskStatus/' + task.task_id, {
                                         method: 'PUT',
                                         headers: {
                                             'Content-Type': 'application/json'

@@ -105,6 +105,40 @@ func (u *Task) Deletar(db *sql.DB) gin.HandlerFunc {
 
 }
 
+// Função com finalidade de atualizar uma task no sistema.
+func (t *Task) Atualizar(db *sql.DB) gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+
+		id := c.Param("id")
+
+		var task Task
+
+		if err := c.BindJSON(&task); err != nil {
+
+			c.JSON(400, gin.H{"message": "Erro ao atualizar task"})
+
+			return
+
+		}
+
+		_, err := db.Exec("UPDATE tasks SET title = $1, description = $2 WHERE task_id = $3", task.Title, task.Description, id)
+
+		if err != nil {
+
+			c.JSON(500, gin.H{"message": "Erro ao atualizar task"})
+
+			return
+
+		}
+
+		c.JSON(200, gin.H{"message": "Task atualizada com sucesso!"})
+
+	}
+
+}
+
+// Função com finalidade de atualizar um status de uma task no sistema.
 func (t *Task) AtualizarStatus(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {

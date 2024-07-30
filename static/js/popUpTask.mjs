@@ -1,6 +1,8 @@
+import { attListTasks } from './attListTasks.mjs';
+
 // Abrir o popUpTask
 
-export function viewPopUpTask (task) {
+export function viewPopUpTask(task) {
 
     var popUpTask = document.getElementById("popUpTask");
 
@@ -18,19 +20,53 @@ export function viewPopUpTask (task) {
 
     taskDescription.value = task.description;
 
-    if (task.status === "pending") {
+    var btUpdateTask = document.getElementById("btUpdateTask");
 
-        var statsBar = document.getElementById("statsBar");
+    btUpdateTask.addEventListener("click", function () {
 
-        statsBar.style.backgroundColor = "yellow";
+        fetch('/task/' + task.task_id, {
 
-    } else {
+            method: 'PUT',
 
-        var statsBar = document.getElementById("statsBar");
+            headers: {
 
-        statsBar.style.backgroundColor = "green";
+                'Content-Type': 'application/json',
 
-    }
+            },
+
+            body: JSON.stringify(
+
+                {
+
+                    title: taskTitle.value,
+
+                    description: taskDescription.value
+
+                }
+            )
+
+        })
+
+            .then(response => {
+
+                if (response.ok) {
+
+                    attListTasks();
+
+                    popUpTask.style.display = "none";
+
+                    overlay.style.display = "none";
+
+                }
+
+                else {
+
+                    alert("Erro ao atualizar a task!");
+
+                }
+
+            });
+
+    });
 
 };
-

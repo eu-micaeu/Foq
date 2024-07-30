@@ -10,6 +10,7 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
+    user-select: none;
 
 }
 
@@ -350,7 +351,9 @@ header #btLogout:hover {
     padding: 8px;
     font-size: 20px;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
     margin: 10px 0;
 
 }
@@ -368,9 +371,11 @@ header #btLogout:hover {
     padding: 8px;
     font-size: 20px;
     border-radius: 5px;
-    border: 1px solid #000;
     margin: 10px 0;
     font-weight: 600;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
     font-family: 'Quicksand', sans-serif;
 
 }
@@ -387,6 +392,28 @@ header #btLogout:hover {
     width: 84%;
     height: 5px;
     border-radius: 10px;
+
+}
+
+#popUpTask form #btUpdateTask {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: #0077ff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 30px;
+    width: 418px;
+
+}
+
+#popUpTask form #btUpdateTask:hover {
+
+    background-color: #0055ff;
+    cursor: pointer;
 
 }
 
@@ -440,7 +467,9 @@ header #btLogout:hover {
     padding: 8px;
     font-size: 20px;
     border-radius: 5px;
-    border: 1px solid #000;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
     margin: 10px 0;
 
 }
@@ -460,6 +489,9 @@ header #btLogout:hover {
     border-radius: 5px;
     margin: 10px 0;
     font-weight: 600;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
     font-family: 'Quicksand', sans-serif;
 
 }
@@ -567,8 +599,8 @@ header #btLogout:hover {
     cursor: pointer;
     margin-top: 10px;
     height: 30px;
-    width: 216px;
     display: none;
+    margin: 30px;
 
 }
 
@@ -588,7 +620,7 @@ header #btLogout:hover {
     border-radius: 50%;
     position: relative;
     background: #202020;
-    margin-top: 5vh;
+    margin-top: 2vh;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     user-select: none;
 }
@@ -635,4 +667,20 @@ header #btLogout:hover {
     transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translateY(-120px);
 }
 
+.day {
+    color: #fff;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    margin: 40px 0 0 0;
+}
 
+.day #weekday {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.day #date {
+    display: block;
+    font-size: 1em;
+}

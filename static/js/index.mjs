@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             statsBar.style.backgroundColor = "yellow";
                         }
                         statsBar.addEventListener("click", () => {
-                            fetch('/task/' + task.task_id, {
+                            fetch('/taskStatus/' + task.task_id, {
                                 method: 'PUT',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         taskDiv.classList.add("task");
                         var btRemove = document.createElement("button");
                         btRemove.innerHTML = "X";
-                        btRemove.id = "btRemove"
+                        btRemove.id = "btRemove";
+                        btRemove.title = "Delete task";
                         btRemove.addEventListener("click", function () {
                             fetch('/task/' + task.task_id, {
                                 method: 'DELETE',

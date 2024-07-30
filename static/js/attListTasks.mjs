@@ -1,4 +1,5 @@
 import { getCookie } from './getCookie.mjs';
+import { viewPopUpTask } from './popUpTask.mjs';
 
 // Função para atualizar a lista de tarefas
 
