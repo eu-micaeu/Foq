@@ -32,5 +32,7 @@ func main() {
 
 	routes.UserRoutes(r, db)
 
+	routes.TaskRoutes(r, db)
+
 	r.Run()
 }

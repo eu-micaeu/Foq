@@ -3,14 +3,16 @@
 <html lang="pt-br">
 
 <head>
-    
+
     <meta charset="UTF-8">
-    
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="../static/css/index.css">
 
     <title>Foq!</title>
+
+    <link rel="icon" href="../static/img/Logo.png" type="image/png">
 
 </head>
 
@@ -22,7 +24,29 @@
 
         <button type="button" id="btLogin">Login</button>
 
+        <button type="button" id="btLogout">Logout</button>
+
     </header>
+
+    <!-- Relógio -->
+    <div class="clock">
+        <div class="hand hour" id="hour"></div>
+        <div class="hand minute" id="minute"></div>
+        <div class="hand second" id="second"></div>
+        <!-- Adicionando números -->
+        <div class="number" style="--i:1;">1</div>
+        <div class="number" style="--i:2;">2</div>
+        <div class="number" style="--i:3;">3</div>
+        <div class="number" style="--i:4;">4</div>
+        <div class="number" style="--i:5;">5</div>
+        <div class="number" style="--i:6;">6</div>
+        <div class="number" style="--i:7;">7</div>
+        <div class="number" style="--i:8;">8</div>
+        <div class="number" style="--i:9;">9</div>
+        <div class="number" style="--i:10;">10</div>
+        <div class="number" style="--i:11;">11</div>
+        <div class="number" style="--i:12;">12</div>
+    </div>
 
     <!-- Overlay geral -->
 
@@ -38,15 +62,15 @@
 
             <p>Foq!</p>
 
-            <label for="username">Username:</label>
+            <label for="usernameLogin">Username:</label>
 
-            <input type="username" id="username" name="username" required>
+            <input type="text" id="usernameLogin" required>
 
-            <label for="password">Password:</label>
+            <label for="passwordLogin">Password:</label>
 
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="passwordLogin" required>
 
-            <button type="submit" id="btSubmitLogin">Submit</button>
+            <button type="button" id="btSubmitLogin">Submit</button>
 
             <button type="button" id="btRegister">Don't have it? Create now!</button>
 
@@ -54,59 +78,91 @@
 
     </div>
 
+    <!-- Pop Up para Registro -->
+
     <div id="popUpRegister">
 
         <form>
 
             <p>Foq!</p>
 
-            <label for="email">Email:</label>
+            <label for="emailRegister">Email:</label>
 
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="emailRegister" name="emailRegister" required>
 
-            <label for="full_name">Full Name:</label>
+            <label for="fullNameRegister">Full Name:</label>
 
-            <input type="text" id="full_name" name="full_name" required>
+            <input type="text" id="fullNameRegister" name="fullNameRegister" required>
 
-            <label for="username">Username:</label>
+            <label for="usernameRegister">Username:</label>
 
-            <input type="username" id="username" name="username" required>
+            <input type="text" id="usernameRegister" name="usernameRegister" required>
 
-            <label for="password">Password:</label>
+            <label for="passwordRegister">Password:</label>
 
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="passwordRegister" name="passwordRegister" required>
 
-            <button type="submit" id="btSubmitRegister">Submit</button>
+            <button type="button" id="btSubmitRegister">Submit</button>
 
         </form>
 
     </div>
 
-    <!-- -->
+    <button type="button" id="btAdicionarTask">Add task</button>
 
-    <div class="clock">
-
-        <div class="hand hour" id="hour"></div>
-
-        <div class="hand minute" id="minute"></div>
-
-        <div class="hand second" id="second"></div>
-
-    </div>
+    <!-- Todas as tasks do usuário -->
 
     <div id="listTasks">
 
-        <div class="task">
+    </div>
 
-            <p>Teste</p>
+    <!-- Pop Up para visualizar Task -->
 
-            <button type="button" id="btRemove">X</button>
+    <div id="popUpTask">
 
-        </div>
+        <form>
+
+            <label for="taskTitle">Title:</label>
+
+            <input type="text" id="taskTitle" required>
+
+            <label for="taskDescription">Description:</label>
+
+            <textarea id="taskDescription" required></textarea>
+
+            <div id="statsBar"></div>
+
+        </form>
 
     </div>
-    
-    <script src="../static/js/index.js"></script>
+
+    <!-- Pop Up para adicionar Task -->
+
+    <div id="popUpAddTask">
+
+        <form>
+
+            <label for="addtaskTitle">Title</label>
+
+            <input for="addtaskTitle" id="addtaskTitle" type="text">
+
+            <label for="addtaskDescription">Description</label>
+
+            <textarea for="addtaskDescription" id="addtaskDescription" type="text"></textarea>
+
+            <button type="button" id="btSubmitAddTask">Submit</button>
+
+        </form>
+
+    </div>
+
+    <script src="../static/js/clock.mjs" type="module"></script>
+    <script src="../static/js/popUpLogin.mjs" type="module"></script>
+    <script src="../static/js/popUpRegister.mjs" type="module"></script>
+    <script src="../static/js/popUpAddTask.mjs" type="module"></script>
+    <script src="../static/js/btLogout.mjs" type="module"></script>
+    <script src="../static/js/overlay.mjs" type="module"></script>
+    <script src="../static/js/index.mjs" type="module"></script>
 
 </body>
 

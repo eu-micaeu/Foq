@@ -1,14 +1,17 @@
 package handlers
 
 import (
+
 	"database/sql"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
+
 )
 
 type User struct {
+
 	User_ID   int       `json:"user_id"`
 	Username  string    `json:"username"`
 	Email     string    `json:"email"`
@@ -16,6 +19,7 @@ type User struct {
 	FullName  string    `json:"full_name"`
 	UserIP    string    `json:"user_ip"`
 	CreatedAt time.Time `json:"created_at"`
+
 }
 
 // Função com finalidade de login do usuário.
@@ -33,9 +37,9 @@ func (u *User) Entrar(db *sql.DB) gin.HandlerFunc {
 
 		}
 
-		row := db.QueryRow("SELECT username, password FROM users WHERE username = $1 AND password = $2", user.Username, user.Password)
+		row := db.QueryRow("SELECT user_id, username, password FROM users WHERE username = $1 AND password = $2", user.Username, user.Password)
 
-		err := row.Scan(&user.Username, &user.Password)
+		err := row.Scan(&user.User_ID, &user.Username, &user.Password)
 
 		if err != nil {
 
@@ -45,24 +49,34 @@ func (u *User) Entrar(db *sql.DB) gin.HandlerFunc {
 
 		}
 
-		token, _ := GerarOToken(user)
+		// Gere o token genérico
+        token, err := GerarOToken(user)
 
-		http.SetCookie(c.Writer, &http.Cookie{
+        if err != nil {
+            c.JSON(500, gin.H{"message": "Erro ao gerar token"})
+            return
+        }
+
+		cookie := &http.Cookie{
 
 			Name: "token",
 
 			Value: token,
 
-			Expires: time.Now().Add(24 * time.Hour),
+			Expires:  time.Now().Add(72 * time.Hour),
 
-			HttpOnly: true,
+			HttpOnly: false,
 
-			Secure: true,
+			Secure: false,
 
 			SameSite: http.SameSiteStrictMode,
-		})
 
-		c.JSON(200, gin.H{"message": "Login efetuado com sucesso!", "token": token, "usuario": user})
+			Path: "/",
+		}
+
+		http.SetCookie(c.Writer, cookie)
+
+		c.JSON(200, gin.H{"message": "Login efetuado com sucesso!", "token": token})
 
 	}
 
@@ -104,6 +118,22 @@ func (u *User) Sair(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 
+		// Lendo o atual token
+
+		token := c.Request.Header.Get("token")
+
+		// Verificando se o token é válido
+
+		_, err := u.ValidarOToken(token)
+
+		if err != nil {
+
+			c.JSON(401, gin.H{"message": "Token inválido"})
+
+			return
+
+		}
+
 		cookie := &http.Cookie{
 
 			Name: "token",
@@ -124,6 +154,47 @@ func (u *User) Sair(db *sql.DB) gin.HandlerFunc {
 		http.SetCookie(c.Writer, cookie)
 
 		c.JSON(200, gin.H{"message": "Saiu com sucesso!"})
+
+	}
+
+}
+
+// Função para verificar se o usuário está logado.
+func (u *User) Logado(db *sql.DB) gin.HandlerFunc {
+
+	return func(c *gin.Context) {
+
+		// Lendo o atual token
+
+		token := c.Request.Header.Get("token")
+
+		// Verificando se o token é válido
+
+		userID, err := u.ValidarOToken(token)
+
+		if err != nil {
+
+			c.JSON(401, gin.H{"message": "Token inválido"})
+
+			return
+
+		}
+
+		row := db.QueryRow("SELECT user_id, username, email, full_name, user_ip, created_at FROM users WHERE user_id = $1", userID)
+
+		var user User
+
+		err = row.Scan(&user.User_ID, &user.Username, &user.Email, &user.FullName, &user.UserIP, &user.CreatedAt)
+
+		if err != nil {
+
+			c.JSON(404, gin.H{"message": "Usuário não encontrado"})
+
+			return
+
+		}
+
+		c.JSON(200, gin.H{"message": "Usuário logado", "user": user})
 
 	}
 

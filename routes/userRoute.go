@@ -17,4 +17,6 @@ func UserRoutes(r *gin.Engine, db *sql.DB) {
 
 	r.POST("/exit", userHandler.Sair(db))
 
+	r.POST("/logged", userHandler.Logado(db))
+
 }

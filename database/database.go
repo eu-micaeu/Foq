@@ -1,36 +1,47 @@
 package database
 
 import (
-
 	"database/sql"
-
 	"fmt"
 	"log"
 	"os"
-
+	
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
-
 )
 
 func NewDB() (*sql.DB, error) {
 
+	// Carrega as variáveis de ambiente do arquivo .env
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Erro ao carregar arquivo .env: %v", err)
+	}
+
 	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASS")
+	dbPassword := os.Getenv("DB_PASSWORD")
 	dbHost := os.Getenv("DB_HOST")
 	dbPort := os.Getenv("DB_PORT")
 	dbName := os.Getenv("DB_NAME")
 
+	if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbName == "" {
+		return nil, fmt.Errorf("uma ou mais variáveis de ambiente não estão definidas")
+	}
+
 	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 	db, err := sql.Open("postgres", dsn)
-
 	if err != nil {
-
 		return nil, fmt.Errorf("erro ao conectar ao banco de dados: %v", err)
+	}
 
+	err = db.Ping()
+	if err != nil {
+		return nil, fmt.Errorf("não foi possível alcançar o banco de dados: %v", err)
 	}
 
 	log.Println("Conectado ao banco de dados com sucesso!")
 
 	return db, nil
+
 }

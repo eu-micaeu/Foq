@@ -1,23 +1,58 @@
 package handlers
 
 import (
-
-	"time"
-	"github.com/gin-gonic/gin"
 	"database/sql"
+	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Task struct {
-	task_ID   int       `json:"task_id"`
-	title  string    	`json:"titleTask"`
-	description string  `json:" descriptionTask"`
-	UserIP    string    `json:"user_ip"`
+	Task_ID   int       `json:"task_id"`
+	User_ID  int    `json:"user_id"`
+	Title     string    `json:"title"`
+	Description  string    `json:"description"`
+	Status  string    `json:"status"`
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// Função com finalidade de resgatar todas as tarefas do usuário.
+func (t *Task) Listar(db *sql.DB) gin.HandlerFunc {
 
-// Função com finalidade de registrar um task de um usuário no sistema.
-func (u *Task) RegistrarTask(db *sql.DB) gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		id := c.Param("id")
+
+		var tasks []Task
+
+		rows, err := db.Query("SELECT task_id, user_id, title, description, status, created_at FROM tasks WHERE user_id = $1 ORDER BY created_at ASC", id)
+
+		if err != nil {
+
+			c.JSON(500, gin.H{"message": "Erro ao buscar tarefas"})
+
+			return
+
+		}
+
+		for rows.Next() {
+
+			var task Task
+
+			rows.Scan(&task.Task_ID, &task.User_ID, &task.Title, &task.Description, &task.Status, &task.CreatedAt)
+
+			tasks = append(tasks, task)
+
+		}
+
+		c.JSON(200, gin.H{"tasks": tasks})
+
+	}
+
+}
+
+// Função com finalidade de criar um task no sistema.
+func (t *Task) Criar(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 
@@ -31,7 +66,7 @@ func (u *Task) RegistrarTask(db *sql.DB) gin.HandlerFunc {
 
 		}
 
-		_, err := db.Exec("INSERT INTO task (titleTask, descriptionTask, user_ip, created_at) VALUES ($1, $2, $3, $4,)", newTask.titleTask, newTask.descriptionTask, c.ClientIP(), time.Now())
+		_, err := db.Exec("INSERT INTO tasks (user_id, title, description, status, created_at) VALUES ($1, $2, $3, $4, $5)", newTask.User_ID, newTask.Title, newTask.Description, newTask.Status, time.Now())
 
 		if err != nil {
 
@@ -47,33 +82,56 @@ func (u *Task) RegistrarTask(db *sql.DB) gin.HandlerFunc {
 
 }
 
+// Função com finalidade de apagar um task no sistema.
+func (u *Task) Deletar(db *sql.DB) gin.HandlerFunc {
+	
+	return func(c *gin.Context) {
 
-// Função com finalidade de excluir um task de um usuário no sistema.
-func (u *Task) ExcluirTask(db *sql.DB) gin.HandlerFunc {
+		id := c.Param("id")
+
+		_, err := db.Exec("DELETE FROM tasks WHERE task_id = $1", id)
+
+		if err != nil {
+
+			c.JSON(500, gin.H{"message": "Erro ao apagar task"})
+
+			return
+
+		}
+
+		c.JSON(200, gin.H{"message": "Task apagada com sucesso!"})
+
+	}
+
+}
+
+func (t *Task) AtualizarStatus(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
+
+		id := c.Param("id")
 
 		var task Task
 
 		if err := c.BindJSON(&task); err != nil {
 
-			c.JSON(400, gin.H{"message": "Erro ao criar task"})
+			c.JSON(400, gin.H{"message": "Erro ao atualizar task"})
 
 			return
 
 		}
 
-		_, err := db.Exec("DELETE FROM task WHERE id = $1 ",task.task_ID)
+		_, err := db.Exec("UPDATE tasks SET status = $1 WHERE task_id = $2", task.Status, id)
 
 		if err != nil {
 
-			c.JSON(500, gin.H{"message": "Erro ao excluir task"})
+			c.JSON(500, gin.H{"message": "Erro ao atualizar task"})
 
 			return
 
 		}
 
-		c.JSON(200, gin.H{"message": "Task criada com sucesso!"})
+		c.JSON(200, gin.H{"message": "Task atualizada com sucesso!"})
 
 	}
 

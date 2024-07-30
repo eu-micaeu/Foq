@@ -1,10 +1,13 @@
 package handlers
 
 import (
-	"database/sql"
+	"fmt"
 	"log"
+	"os"
 	"time"
+
 	"github.com/dgrijalva/jwt-go"
+	"github.com/joho/godotenv"
 )
 
 type Claims struct {
@@ -12,67 +15,54 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-var jwtKey = []byte("my_secret_key")
+var jwtKey []byte
 
-// Função para verificar se o token está na tabela de tokens inválidos
-func tokenEstaNaTabelaDeTokensInvalidos(db *sql.DB, tokenString string) bool {
+func init() {
 
-	query := "SELECT COUNT(*) FROM tokens_invalidos WHERE token_invalido = $1"
-
-	var count int
-
-	err := db.QueryRow(query, tokenString).Scan(&count)
-
+	err := godotenv.Load()
 	if err != nil {
-
-		log.Println("Erro ao consultar a tabela de tokens inválidos:", err)
-
-		return true
-
+		log.Fatalf("Erro ao carregar arquivo .env: %v", err)
 	}
 
-	return count > 0
+	// Carrega a chave secreta de uma variável de ambiente
+	jwtKey = []byte(os.Getenv("JWT_SECRET_KEY"))
+
+	if len(jwtKey) == 0 {
+		log.Fatalf("Erro: JWT_SECRET_KEY não está definido")
+	}
 
 }
 
 // Função com finalidade de validação do token para as funções do usuário.
-func (u *User) ValidarOToken(db *sql.DB, tokenString string) (int, error) {
-
-	if tokenEstaNaTabelaDeTokensInvalidos(db, tokenString) {
-
-		return 0, nil
-
-	}
+func (u *User) ValidarOToken(tokenString string) (int, error) {
 
 	claims := &Claims{}
 
 	tkn, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-
 		return jwtKey, nil
-
 	})
 
-	if err != nil || !tkn.Valid {
-
+	if err != nil {
+		fmt.Printf("Erro ao analisar o token: %v\n", err)
 		return 0, err
+	}
 
+	if !tkn.Valid {
+		fmt.Println("Token inválido")
+		return 0, fmt.Errorf("token inválido")
 	}
 
 	return claims.User_ID, nil
-
+	
 }
 
 // Função com finalidade de geração do token para as funções do usuário.
-func GerarOToken(usuario User) (string, error) {
-
+func GerarOToken(user User) (string, error) {
 	expirationTime := time.Now().Add(24 * time.Hour)
 
 	claims := &Claims{
-
-		User_ID: usuario.User_ID,
-
+		User_ID: user.User_ID,
 		StandardClaims: jwt.StandardClaims{
-
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
@@ -80,11 +70,8 @@ func GerarOToken(usuario User) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	tokenString, err := token.SignedString(jwtKey)
-
 	if err != nil {
-
-		return "Erro ao gerar token", err
-
+		return "", err
 	}
 
 	return tokenString, nil
