@@ -1,0 +1,108 @@
+@import url('animations.css');
+
+#popUpAddTask {
+
+    display: none;
+
+    /* Centralizar o Pop Up */
+
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202020;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    padding: 10px;
+
+    /* Animação */
+
+    animation: queda 0.5s;
+
+}
+
+#popUpAddTask form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 10px;
+
+
+}
+
+#popUpAddTask form label {
+
+    color: #ffffff;
+    font-size: 1.1em;
+    width: 416px;
+
+}
+
+#popUpAddTask form input {
+
+    width: 400px;
+    height: 15px;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
+    margin: 10px 0;
+
+}
+
+#popUpAddTask form input:focus {
+
+    outline: none;
+
+}
+
+#popUpAddTask form textarea {
+
+    width: 400px;
+    height: 300px;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 5px;
+    margin: 10px 0;
+    font-weight: 600;
+    border: 1px solid #ffffff;
+    background-color: transparent;
+    color: #fff;
+    font-family: 'Quicksand', sans-serif;
+
+}
+
+#popUpAddTask form textarea:focus {
+
+    outline: none;
+
+}
+
+#popUpAddTask form #btSubmitAddTask {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: #00aa00;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    height: 30px;
+    width: 418px;
+
+}
+
+#popUpAddTask form #btSubmitAddTask:hover {
+
+    background-color: #008800;
+    cursor: pointer;
+
+}

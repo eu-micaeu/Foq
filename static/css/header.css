@@ -1,0 +1,75 @@
+header {
+
+    width: 100%;
+    background-color: #202020;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+
+}
+
+header p {
+
+    font-size: 1.5em;
+    cursor: default;
+    user-select: none;
+    
+}
+
+header #btLogin {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #202020;
+    padding: 5px 10px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+}
+
+header #btLogin:hover {
+
+    background-color: #202020;
+    color: #707070;
+    cursor: pointer;
+
+}
+
+header #btLogout {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: transparent;
+    color: #ff0000;
+    border: 2px solid #202020;
+    padding: 5px 10px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    padding: 20px;
+    display: none;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
+}
+
+header #btLogout:hover {
+
+    background-color: #202020;
+    color: #850000;
+    cursor: pointer;
+
+}

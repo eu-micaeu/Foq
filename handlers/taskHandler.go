@@ -8,12 +8,12 @@ import (
 )
 
 type Task struct {
-	Task_ID   int       `json:"task_id"`
-	User_ID  int    `json:"user_id"`
-	Title     string    `json:"title"`
-	Description  string    `json:"description"`
-	Status  string    `json:"status"`
-	CreatedAt time.Time `json:"created_at"`
+	Task_ID     int       `json:"task_id"`
+	User_ID     int       `json:"user_id"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	Status      string    `json:"status"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 // Função com finalidade de resgatar todas as tarefas do usuário.
@@ -84,7 +84,7 @@ func (t *Task) Criar(db *sql.DB) gin.HandlerFunc {
 
 // Função com finalidade de apagar um task no sistema.
 func (u *Task) Deletar(db *sql.DB) gin.HandlerFunc {
-	
+
 	return func(c *gin.Context) {
 
 		id := c.Param("id")
@@ -122,7 +122,7 @@ func (t *Task) Atualizar(db *sql.DB) gin.HandlerFunc {
 
 		}
 
-		if(task.Title == "" || task.Description == "") {
+		if task.Title == "" || task.Description == "" {
 
 			c.JSON(400, gin.H{"message": "Erro ao atualizar task"})
 

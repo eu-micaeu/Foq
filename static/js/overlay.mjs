@@ -8,6 +8,8 @@ document.getElementById("overlay").addEventListener("click", function () {
 
     var popUpAddTask = document.getElementById("popUpAddTask");
 
+    var popUpLogout = document.getElementById("popUpLogout");
+
     var overlay = document.getElementById("overlay");
 
     popUpLogin.style.display = "none";
@@ -17,6 +19,8 @@ document.getElementById("overlay").addEventListener("click", function () {
     popUpTask.style.display = "none";
 
     popUpAddTask.style.display = "none";
+
+    popUpLogout.style.display = "none";
 
     overlay.style.display = "none";
 

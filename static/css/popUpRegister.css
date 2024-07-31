@@ -1,0 +1,86 @@
+#popUpRegister {
+
+    display: none;
+
+    /* Centralizar o Pop Up */
+
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #202020;
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+#popUpRegister form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 10px;
+
+
+}
+
+#popUpRegister form p {
+
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #ffffff;
+
+}
+
+#popUpRegister form label {
+
+    color: #ffffff;
+    font-size: 1.1em;
+    width: 216px;
+
+}
+
+#popUpRegister form input {
+
+    width: 200px;
+    height: 15px;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    margin: 10px 0;
+
+}
+
+#popUpRegister form input:focus {
+
+    outline: none;
+
+}
+
+#popUpRegister form #btSubmitRegister {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: #00aa00;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    height: 30px;
+    width: 216px;
+
+}
+
+#popUpRegister form #btSubmitRegister:hover {
+
+    background-color: #008800;
+    cursor: pointer;
+
+}

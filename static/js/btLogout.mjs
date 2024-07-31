@@ -2,44 +2,49 @@ import { getCookie } from './getCookie.mjs';
 
 document.getElementById("btLogout").addEventListener("click", function () {
 
-    fetch('/exit', {
+    var overlay = document.getElementById("overlay");
 
-        method: 'POST',
+    overlay.style.display = "flex";
 
-        headers: {
+    var popUpLogout = document.getElementById("popUpLogout");
 
-            'Content-Type': 'application/json',
+    popUpLogout.style.display = "flex";
 
-            'token': getCookie("token")
+    var btYesLogout = document.getElementById("btYesLogout");
 
-        },
+    btYesLogout.addEventListener("click", function () {
 
-    })
-
-        .then(response => {
-
-            if (response.ok) {
-
-                var btLogin = document.getElementById("btLogin");
-
-                btLogin.style.display = "flex";
-
-                var btLogout = document.getElementById("btLogout");
-
-                btLogout.style.display = "none";
-
-                var btAdicionarTask = document.getElementById("btAdicionarTask");
-
-                btAdicionarTask.style.display = "none";
-
-                var tasksList = document.getElementById("listTasks");
-
-                tasksList.innerHTML = "";
-
-            }
-
-            return response.json();
-
+        fetch('/exit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': getCookie("token")
+            },
         })
+            .then(response => {
+                if (response.ok) {
+                    var btLogin = document.getElementById("btLogin");
+                    btLogin.style.display = "flex";
+                    var btLogout = document.getElementById("btLogout");
+                    btLogout.style.display = "none";
+                    var btAdicionarTask = document.getElementById("btAdicionarTask");
+                    btAdicionarTask.style.display = "none";
+                    var tasksList = document.getElementById("listTasks");
+                    tasksList.innerHTML = "";
+                }
+                return response.json();
+            })
+
+    });
+
+    var btNoLogout = document.getElementById("btNoLogout");
+
+    btNoLogout.addEventListener("click", function () {
+
+        popUpLogout.style.display = "none";
+
+        overlay.style.display = "none";
+
+    });
 
 });

@@ -123,21 +123,24 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                         .then(data => {
 
                             var tasks = data.tasks;
-        
+
                             var tasksList = document.getElementById("listTasks");
-        
+
                             tasksList.innerHTML = "";
-        
+
                             // Bloco de código que cria um elemento HTML para cada tarefa
-        
+
                             tasks.forEach(task => {
                                 var taskDiv = document.createElement("div");
                                 var taskTitle = document.createElement("p");
                                 var statsBar = document.createElement("div");
-                                statsBar.style.width = "40vw";
+
+                                statsBar.style.width = "200px";
+                                statsBar.style.margin = "10px";
                                 statsBar.style.height = "15px";
                                 statsBar.style.borderRadius = "10px";
                                 statsBar.style.cursor = "pointer";
+
                                 if (task.status === "done") {
                                     statsBar.style.backgroundColor = "green";
                                 } else if (task.status === "pending") {
@@ -185,16 +188,16 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                 });
                                 taskTitle.innerHTML = task.title;
                                 taskTitle.style.cursor = "pointer";
-                                taskTitle.style.width = "70px";
+                                taskTitle.style.width = "100px";
                                 taskTitle.addEventListener("click", () => viewPopUpTask(task));
                                 taskDiv.appendChild(taskTitle);
                                 taskDiv.appendChild(statsBar);
                                 taskDiv.appendChild(btRemove);
                                 tasksList.appendChild(taskDiv);
                             });
-        
+
                             ///////////////////////////////////////////////////////
-        
+
                         })
                 })
 

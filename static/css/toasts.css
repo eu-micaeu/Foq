@@ -1,0 +1,29 @@
+#toastGreen {
+
+    display: none;
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: green;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+#toastBlue {
+
+    display: none;
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0055ff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+
+}

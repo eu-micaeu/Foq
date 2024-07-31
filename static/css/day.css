@@ -1,0 +1,23 @@
+.day {
+
+    color: #fff;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    margin: 40px 0 0 0;
+
+}
+
+.day #weekday {
+
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+
+}
+
+.day #date {
+
+    display: block;
+    font-size: 1em;
+
+}
