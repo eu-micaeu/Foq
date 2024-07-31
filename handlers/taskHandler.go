@@ -122,6 +122,14 @@ func (t *Task) Atualizar(db *sql.DB) gin.HandlerFunc {
 
 		}
 
+		if(task.Title == "" || task.Description == "") {
+
+			c.JSON(400, gin.H{"message": "Erro ao atualizar task"})
+
+			return
+
+		}
+
 		_, err := db.Exec("UPDATE tasks SET title = $1, description = $2 WHERE task_id = $3", task.Title, task.Description, id)
 
 		if err != nil {

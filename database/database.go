@@ -6,17 +6,10 @@ import (
 	"log"
 	"os"
 	
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 func NewDB() (*sql.DB, error) {
-
-	// Carrega as variáveis de ambiente do arquivo .env
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Erro ao carregar arquivo .env: %v", err)
-	}
 
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")

@@ -50,8 +50,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     'Content-Type': 'application/json',
 
-                    'token': getCookie("token")
-
                 },
 
             })
@@ -80,33 +78,56 @@ document.addEventListener('DOMContentLoaded', function () {
                         statsBar.style.height = "15px";
                         statsBar.style.borderRadius = "10px";
                         statsBar.style.cursor = "pointer";
+
                         if (task.status === "done") {
                             statsBar.style.backgroundColor = "green";
                         } else if (task.status === "pending") {
                             statsBar.style.backgroundColor = "yellow";
                         }
+
                         statsBar.addEventListener("click", () => {
+                            
                             fetch('/taskStatus/' + task.task_id, {
+
                                 method: 'PUT',
+
                                 headers: {
+
                                     'Content-Type': 'application/json'
+                                    
                                 },
+
                                 body: JSON.stringify({
+
                                     status: task.status === "done" ? "pending" : "done"
+
                                 })
+
                             })
                                 .then(response => {
+
                                     if (response.ok) {
+
                                         task.status = task.status === "done" ? "pending" : "done";
+
                                         if (task.status === "done") {
+
                                             statsBar.style.backgroundColor = "green";
+
                                         } else if (task.status === "pending") {
+
                                             statsBar.style.backgroundColor = "yellow";
+
                                         }
+
                                     }
+
                                     return response.json();
+
                                 })
+
                         });
+
                         taskDiv.classList.add("task");
                         var btRemove = document.createElement("button");
                         btRemove.innerHTML = "X";
@@ -129,7 +150,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         taskTitle.innerHTML = task.title;
                         taskTitle.style.cursor = "pointer";
                         taskTitle.style.width = "70px";
+
                         taskTitle.addEventListener("click", () => viewPopUpTask(task));
+                        
                         taskDiv.appendChild(taskTitle);
                         taskDiv.appendChild(statsBar);
                         taskDiv.appendChild(btRemove);

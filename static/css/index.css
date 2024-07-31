@@ -26,8 +26,8 @@ header {
 
 header p {
     font-size: 1.5em;
-    cursor: default; 
-    user-select: none; 
+    cursor: default;
+    user-select: none;
 }
 
 header #btLogin {
@@ -59,7 +59,7 @@ header #btLogin:hover {
 
 }
 
-header #btLogout{
+header #btLogout {
 
     font-family: 'Quicksand', sans-serif;
     background-color: transparent;
@@ -77,7 +77,7 @@ header #btLogout{
     align-items: center;
     text-align: center;
     justify-content: center;
-   
+
 }
 
 header #btLogout:hover {
@@ -564,7 +564,7 @@ header #btLogout:hover {
 
 }
 
-.task:hover{
+.task:hover {
 
     transform: scale(1.02);
 
@@ -613,58 +613,21 @@ header #btLogout:hover {
 
 /* Clock */
 
-.clock {
-    width: 300px;
-    height: 300px;
-    border: 8px solid #000;
-    border-radius: 50%;
-    position: relative;
-    background: #202020;
-    margin-top: 2vh;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    user-select: none;
-}
-
-.hand {
-    width: 50%;
-    height: 2px;
-    background: #000;
-    position: absolute;
-    top: 50%;
-    transform-origin: 100%;
-    transform: rotate(90deg);
-    transition: transform 0.5s ease-in-out;
-}
-
-.hour {
-    height: 4px;
-    background: #333;
-}
-
-.minute {
-    height: 3px;
-    background: #555;
-}
-
-.second {
-    height: 2px;
-    background: red;
-}
-
-.number {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 16px;
+#clock {
+    font-family: 'Quicksand', monospace;
+    font-size: 2em;
     color: #fff;
-    font-weight: bold;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    transform-origin: center;
-    transform: translate(-50%, -50%) rotate(calc(var(--i) * 30deg)) translateY(-120px);
+    margin-top: 5vh;
+    font-size: 128px;
+    letter-spacing: 10px;
+}
+
+#clock span {
+    display: inline-block;
+    width: 2ch;
+    text-align: center;
+    padding-left: 20px; /* Espaço à esquerda */
+    padding-right: 20px; /* Espaço à direita */
 }
 
 .day {
@@ -683,4 +646,34 @@ header #btLogout:hover {
 .day #date {
     display: block;
     font-size: 1em;
+}
+
+#toastGreen {
+
+    display: none;
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: green;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+#toastBlue {
+
+    display: none;
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #0055ff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+
 }

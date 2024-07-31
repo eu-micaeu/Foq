@@ -73,8 +73,22 @@ document.getElementById("btSubmitAddTask").addEventListener("click", function (e
                     var popUpAddTask = document.getElementById("popUpAddTask");
                     var overlay = document.getElementById("overlay");
                     popUpAddTask.style.display = "none";
-                    overlay.style.display = "none";
+
+                    document.getElementById("addtaskDescription").value = '';
+                    document.getElementById("addtaskTitle").value = '';
+
                     attListTasks();
+
+                    var toastGreen = document.getElementById("toastGreen")
+
+                    toastGreen.style.display = "block";
+
+                    setTimeout(function(){
+
+                        overlay.style.display = "none";
+                        toastGreen.style.display = "none";
+                        
+                    }, 2000);
 
                 }
                 return response.json();

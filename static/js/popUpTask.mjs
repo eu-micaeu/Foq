@@ -55,7 +55,16 @@ export function viewPopUpTask(task) {
 
                     popUpTask.style.display = "none";
 
-                    overlay.style.display = "none";
+                    var toastBlue = document.getElementById("toastBlue")
+
+                    toastBlue.style.display = "block";
+
+                    setTimeout(function(){
+
+                        overlay.style.display = "none";
+                        toastBlue.style.display = "none";
+                        
+                    }, 2000);
 
                 }
 

@@ -1,22 +1,16 @@
 function updateClock() {
-
     const now = new Date();
-    const seconds = now.getSeconds();
-    const minutes = now.getMinutes();
-    const hours = now.getHours();
+    let seconds = now.getSeconds().toString().padStart(2, '0');
+    let minutes = now.getMinutes().toString().padStart(2, '0');
+    let hours = now.getHours().toString().padStart(2, '0');
 
-    const secondDegree = (seconds / 60) * 360;
-    const minuteDegree = (minutes / 60) * 360 + (seconds / 60) * 6;
-    const hourDegree = (hours / 12) * 360 + (minutes / 60) * 30;
-
-    document.getElementById('second').style.transform = `rotate(${secondDegree}deg)`;
-    document.getElementById('minute').style.transform = `rotate(${minuteDegree}deg)`;
-    document.getElementById('hour').style.transform = `rotate(${hourDegree}deg)`;
-
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
 }
 
+// Chame updateClock a cada segundo
 setInterval(updateClock, 1000);
-
 updateClock();
 
 function updateDate() {
