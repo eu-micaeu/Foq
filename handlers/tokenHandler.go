@@ -3,11 +3,9 @@ package handlers
 import (
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/joho/godotenv"
 )
 
 type Claims struct {
@@ -19,13 +17,8 @@ var jwtKey []byte
 
 func init() {
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Erro ao carregar arquivo .env: %v", err)
-	}
-
 	// Carrega a chave secreta de uma variável de ambiente
-	jwtKey = []byte(os.Getenv("JWT_SECRET_KEY"))
+	jwtKey = []byte("heythisismysecretkey")
 
 	if len(jwtKey) == 0 {
 		log.Fatalf("Erro: JWT_SECRET_KEY não está definido")

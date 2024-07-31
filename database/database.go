@@ -4,24 +4,23 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	
 	_ "github.com/lib/pq"
 )
 
 func NewDB() (*sql.DB, error) {
 
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbName := os.Getenv("DB_NAME")
+	dbUser := "foq_user"
+	dbPassword := "cRl8AAcdzP9KMhQ0chpD5udxFpMkUpk2"
+	dbHost := "dpg-cqkpnvd6l47c73esq230-a.oregon-postgres.render.com"
+	dbPort := "5432"
+	dbName := "foq"
 
 	if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbName == "" {
 		return nil, fmt.Errorf("uma ou mais variáveis de ambiente não estão definidas")
 	}
 
-	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", dbUser, dbPassword, dbHost, dbPort, dbName)
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=require", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {

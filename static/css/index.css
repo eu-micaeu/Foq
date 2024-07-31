@@ -99,6 +99,20 @@ header #btLogout:hover {
 
 }
 
+#btTutorial {
+
+    font-family: 'Quicksand', sans-serif;
+    background-color: #000000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    height: 30px;
+
+}
+
 /* Pop Up para Login */
 
 #popUpLogin {
