@@ -47,18 +47,20 @@ export function attListTasks() {
                     // Bloco de código que cria um elemento HTML para cada tarefa
 
                     tasks.forEach(task => {
+
                         var taskDiv = document.createElement("div");
+
                         var taskTitle = document.createElement("p");
+
                         var statsBar = document.createElement("div");
-                        statsBar.style.width = "40vw";
-                        statsBar.style.height = "15px";
-                        statsBar.style.borderRadius = "10px";
-                        statsBar.style.cursor = "pointer";
+                        statsBar.id = "statsBar";
+
                         if (task.status === "done") {
                             statsBar.style.backgroundColor = "green";
                         } else if (task.status === "pending") {
                             statsBar.style.backgroundColor = "yellow";
                         }
+
                         statsBar.addEventListener("click", () => {
                             fetch('/taskStatus/' + task.task_id, {
                                 method: 'PUT',
@@ -81,10 +83,13 @@ export function attListTasks() {
                                     return response.json();
                                 })
                         });
-                        taskDiv.classList.add("task");
+
                         var btRemove = document.createElement("button");
+
                         btRemove.innerHTML = "X";
-                        btRemove.id = "btRemove"
+
+                        btRemove.id = "btRemove";
+
                         btRemove.addEventListener("click", function () {
                             fetch('/task/' + task.task_id, {
                                 method: 'DELETE',
@@ -99,10 +104,15 @@ export function attListTasks() {
                                     return response.json();
                                 })
                         });
+                    
                         taskTitle.innerHTML = task.title;
                         taskTitle.style.cursor = "pointer";
-                        taskTitle.style.width = "70px";
+                        taskTitle.style.width = "200px";
+
                         taskTitle.addEventListener("click", () => viewPopUpTask(task));
+                        
+                        taskDiv.classList.add("task");
+
                         taskDiv.appendChild(taskTitle);
                         taskDiv.appendChild(statsBar);
                         taskDiv.appendChild(btRemove);

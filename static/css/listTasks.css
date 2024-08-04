@@ -30,6 +30,16 @@
 
 }
 
+#listTasks .task #statsBar {
+
+    width: 200px;
+    margin: 10px;
+    height: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
 #listTasks .task #btRemove {
 
     background-color: rgb(160, 0, 0);

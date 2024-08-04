@@ -18,7 +18,7 @@ function updateDate() {
     
     // Definindo os nomes dos dias da semana e dos meses
     const day = now.getDate();
-    const month = now.getMonth();
+    const month = now.getMonth() + 1; // Adiciona 1 ao mês
     const year = now.getFullYear();
     
     // Atualizando o conteúdo
@@ -30,3 +30,4 @@ updateDate();
 
 // Atualize a data a cada dia (24 horas em milissegundos)
 setInterval(updateDate, 24 * 60 * 60 * 1000);
+

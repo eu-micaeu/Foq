@@ -75,14 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     tasks.forEach(task => {
 
                         var taskDiv = document.createElement("div");
-                        var taskTitle = document.createElement("p");
-                        var statsBar = document.createElement("div");
 
-                        statsBar.style.width = "200px";
-                        statsBar.style.margin = "10px";
-                        statsBar.style.height = "15px";
-                        statsBar.style.borderRadius = "10px";
-                        statsBar.style.cursor = "pointer";
+                        var taskTitle = document.createElement("p");
+
+                        var statsBar = document.createElement("div");
+                        statsBar.id = "statsBar";
 
                         if (task.status === "done") {
 
@@ -95,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         }
 
                         statsBar.addEventListener("click", () => {
-                            
+
                             fetch('/taskStatus/' + task.task_id, {
 
                                 method: 'PUT',
@@ -103,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 headers: {
 
                                     'Content-Type': 'application/json'
-                                    
+
                                 },
 
                                 body: JSON.stringify({
@@ -137,41 +134,64 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         });
 
-                        taskDiv.classList.add("task");
                         var btRemove = document.createElement("button");
+
                         btRemove.innerHTML = "X";
+
                         btRemove.id = "btRemove";
+
                         btRemove.title = "Delete task";
+
                         btRemove.addEventListener("click", function () {
+
                             fetch('/task/' + task.task_id, {
+
                                 method: 'DELETE',
+
                                 headers: {
+
                                     'Content-Type': 'application/json'
+
                                 },
+
                             })
+
                                 .then(response => {
+
                                     if (response.ok) {
+
                                         tasksList.removeChild(taskDiv);
+
                                     }
+
                                     return response.json();
+
                                 })
+
                         });
 
                         taskTitle.innerHTML = task.title;
+
                         taskTitle.style.cursor = "pointer";
-                        taskTitle.style.width = "100px";
+
+                        taskTitle.style.width = "200px";
 
                         taskTitle.addEventListener("click", () => viewPopUpTask(task));
-                        
+
+                        taskDiv.classList.add("task");
+
                         taskDiv.appendChild(taskTitle);
+
                         taskDiv.appendChild(statsBar);
+
                         taskDiv.appendChild(btRemove);
+
                         tasksList.appendChild(taskDiv);
+
                     });
 
-                    ///////////////////////////////////////////////////////
-
                 })
-        })
 
+        })
+        
 });

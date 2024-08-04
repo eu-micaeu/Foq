@@ -31,6 +31,8 @@ document.getElementById("btLogout").addEventListener("click", function () {
                     btAdicionarTask.style.display = "none";
                     var tasksList = document.getElementById("listTasks");
                     tasksList.innerHTML = "";
+                    popUpLogout.style.display = "none";
+                    overlay.style.display = "none";
                 }
                 return response.json();
             })

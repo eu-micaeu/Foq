@@ -8,19 +8,36 @@
     align-items: center;
     background-color: rgb(255, 0, 0);
     z-index: 1;
-    width: 300px;
-    height: 100px;
+    width: 500px;
+    height: 200px;
     animation: aparecer 0.5s;
     font-weight: bold;
     padding: 30px;
 
 }
 
+#popUpLogout form{
+
+    width: 500px;
+
+}
+
+#popUpLogout form p{
+
+    text-align: center;
+
+    width: 100%;
+
+    font-size: 24px;
+
+}
+
+
 #popUpLogout form #buttons{
 
     display: flex;
     justify-content: space-around;
-    width: 80%;
+    width: 100%;
 
 }
 
@@ -34,6 +51,7 @@
     cursor: pointer;
     margin-top: 10px;
     height: 30px;
+    width: 100px;
 
 }
 

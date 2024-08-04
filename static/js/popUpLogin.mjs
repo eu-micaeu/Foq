@@ -118,8 +118,11 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                         },
                     })
                         .then(response => {
+
                             return response.json();
+
                         })
+                        
                         .then(data => {
 
                             var tasks = data.tasks;
@@ -131,21 +134,24 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                             // Bloco de código que cria um elemento HTML para cada tarefa
 
                             tasks.forEach(task => {
-                                var taskDiv = document.createElement("div");
-                                var taskTitle = document.createElement("p");
-                                var statsBar = document.createElement("div");
 
-                                statsBar.style.width = "200px";
-                                statsBar.style.margin = "10px";
-                                statsBar.style.height = "15px";
-                                statsBar.style.borderRadius = "10px";
-                                statsBar.style.cursor = "pointer";
+                                var taskDiv = document.createElement("div");
+
+                                var taskTitle = document.createElement("p");
+
+                                var statsBar = document.createElement("div");
+                                statsBar.id = "statsBar";
 
                                 if (task.status === "done") {
+
                                     statsBar.style.backgroundColor = "green";
+
                                 } else if (task.status === "pending") {
+
                                     statsBar.style.backgroundColor = "yellow";
+
                                 }
+
                                 statsBar.addEventListener("click", () => {
                                     fetch('/taskStatus/' + task.task_id, {
                                         method: 'PUT',
@@ -168,7 +174,9 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                             return response.json();
                                         })
                                 });
+
                                 taskDiv.classList.add("task");
+
                                 var btRemove = document.createElement("button");
                                 btRemove.innerHTML = "X";
                                 btRemove.id = "btRemove"
@@ -188,7 +196,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                 });
                                 taskTitle.innerHTML = task.title;
                                 taskTitle.style.cursor = "pointer";
-                                taskTitle.style.width = "100px";
+                                taskTitle.style.width = "200px";
                                 taskTitle.addEventListener("click", () => viewPopUpTask(task));
                                 taskDiv.appendChild(taskTitle);
                                 taskDiv.appendChild(statsBar);
