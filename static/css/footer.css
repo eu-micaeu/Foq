@@ -13,12 +13,13 @@ footer{
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
     user-select: none;
+    margin-top: 20vh;
 
 }
 
 footer p{
 
-    width: 50vw;
+    width: 40vw;
     margin: 0;
     text-align: center;
 
