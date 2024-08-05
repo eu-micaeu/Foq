@@ -4,10 +4,11 @@ import { viewPopUpTask } from './popUpTask.mjs';
 // Função DOM que é executada quando o documento HTML é carregado
 document.addEventListener('DOMContentLoaded', function () {
 
-    const foqModeButton = document.getElementById('logo');
+    const btFoqMode = document.getElementById('btFoqMode');
     const body = document.body;
 
-    foqModeButton.addEventListener('click', () => {
+    btFoqMode.addEventListener('click', () => {
+
         if (!document.fullscreenElement) {
             // Entrar em modo tela cheia
             if (body.requestFullscreen) {
@@ -22,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Adicionar a classe para ocultar outros elementos
             body.classList.add('foq-mode');
+
         } else {
             // Sair do modo tela cheia
             if (document.exitFullscreen) {
@@ -36,7 +38,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Remover a classe para mostrar os outros elementos
             body.classList.remove('foq-mode');
+
         }
+        
     });
 
     // Verifique se o usuário está logado
