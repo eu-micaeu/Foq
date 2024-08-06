@@ -59,3 +59,21 @@
     cursor: pointer;
 
 }
+
+/* Mobile */
+
+@media screen and (max-width: 600px) {
+
+    #listTasks {
+
+        grid-template-columns: repeat(1, 1fr);
+    
+    }
+
+    #listTasks .task {
+
+        width: 80vw;
+    
+    }
+
+}

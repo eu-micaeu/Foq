@@ -8,7 +8,6 @@ footer{
     width: 100%;
     height: 50px;
     padding: 10px 0;
-    position: absolute;
     bottom: 0;
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
@@ -35,5 +34,17 @@ footer p a{
 footer p a:hover{
 
     color: #afafaf;
+
+}
+
+/* Mobile */
+
+@media screen and (max-width: 600px) {
+
+    footer {
+
+        font-size: 12px;
+    
+    }
 
 }

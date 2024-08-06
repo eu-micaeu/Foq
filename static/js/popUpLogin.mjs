@@ -72,7 +72,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                     overlay.style.display = "none";
 
-                }, 2000);
+                }, 1200);
 
             }else{
 
@@ -84,7 +84,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                     toastRedLogin.style.display = "none";
 
-                }, 2000);
+                }, 1200);
 
                 document.getElementById("usernameLogin").value = "";
 

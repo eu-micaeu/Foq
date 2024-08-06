@@ -52,6 +52,9 @@
     border-radius: 5px;
     border: 1px solid #000;
     margin: 10px 0;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #ffffff;
 
 }
 

@@ -12,6 +12,7 @@
 @import url('listTasks.css');
 @import url('toasts.css');
 @import url('animations.css');
+@import url('scrollBar.css');
 
 body {
 
@@ -96,7 +97,7 @@ body {
     align-items: center;
     flex-direction: row;
     margin-top: 30px;
-    width: 600px;
+    width: 40vw;
 
 }
 
@@ -124,4 +125,16 @@ body {
     background-color: black;
     overflow: hidden;
     z-index: 999;
+}
+
+/* Mobile */
+
+@media screen and (max-width: 600px) {
+
+    #infosDay{
+
+        width: 80vw;
+
+    }
+
 }

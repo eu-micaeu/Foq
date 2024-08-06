@@ -15,9 +15,9 @@ type Claims struct {
 
 var jwtKey []byte
 
+// Função com finalidade de inicialização da chave de segurança do token.
 func init() {
 
-	// Carrega a chave secreta de uma variável de ambiente
 	jwtKey = []byte("heythisismysecretkey")
 
 	if len(jwtKey) == 0 {
@@ -36,12 +36,10 @@ func (u *User) ValidarOToken(tokenString string) (int, error) {
 	})
 
 	if err != nil {
-		fmt.Printf("Erro ao analisar o token: %v\n", err)
 		return 0, err
 	}
 
 	if !tkn.Valid {
-		fmt.Println("Token inválido")
 		return 0, fmt.Errorf("token inválido")
 	}
 
