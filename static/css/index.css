@@ -54,17 +54,17 @@ body {
 }
 
 #overlay {
-
-    display: none;
+    display: none; /* ou block, conforme necessário para testes */
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.795);
-    z-index: 1;
-
+    z-index: 1; /* Certifique-se de que seja superior ao z-index do footer */
     animation: aparecer 0.5s;
-
 }
+
 
 #btAdicionarTask {
 
