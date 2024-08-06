@@ -58,12 +58,37 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                 var overlay = document.getElementById("overlay");
 
-                popUpLogin.style.display = "none";
+                var toastGreenLogin = document.getElementById("toastGreenLogin");
 
-                popUpRegister.style.display = "none";
+                toastGreenLogin.style.display = "block";
 
-                overlay.style.display = "none";
+                setTimeout(function () {
 
+                    toastGreenLogin.style.display = "none";
+
+                    popUpLogin.style.display = "none";
+
+                    popUpRegister.style.display = "none";
+
+                    overlay.style.display = "none";
+
+                }, 2000);
+
+            }else{
+
+                var toastRedLogin = document.getElementById("toastRedLogin");
+
+                toastRedLogin.style.display = "block";
+
+                setTimeout(function () {
+
+                    toastRedLogin.style.display = "none";
+
+                }, 2000);
+
+                document.getElementById("usernameLogin").value = "";
+
+                document.getElementById("passwordLogin").value = "";
 
             }
 
@@ -101,7 +126,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                         var btAdicionarTask = document.getElementById("btAdicionarTask");
 
-                        btAdicionarTask.style.display = "block";
+                        btAdicionarTask.style.display = "flex";
 
                     }
 
@@ -122,7 +147,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                             return response.json();
 
                         })
-                        
+
                         .then(data => {
 
                             var tasks = data.tasks;
@@ -141,6 +166,7 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                                 var statsBar = document.createElement("div");
                                 statsBar.id = "statsBar";
+                                statsBar.title = "Change status";
 
                                 if (task.status === "done") {
 

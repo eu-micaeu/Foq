@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 var btAdicionarTask = document.getElementById("btAdicionarTask");
 
-                btAdicionarTask.style.display = "block";
+                btAdicionarTask.style.display = "flex";
 
             }
 
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         var statsBar = document.createElement("div");
                         statsBar.id = "statsBar";
+                        statsBar.title = "Change status";
 
                         if (task.status === "done") {
 

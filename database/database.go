@@ -4,17 +4,25 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	
+	"os"
+
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
 func NewDB() (*sql.DB, error) {
 
-	dbUser := "foq_user"
-	dbPassword := "cRl8AAcdzP9KMhQ0chpD5udxFpMkUpk2"
-	dbHost := "dpg-cqkpnvd6l47c73esq230-a.oregon-postgres.render.com"
-	dbPort := "5432"
-	dbName := "foq"
+	// Carregar variáveis de ambiente do arquivo .env
+	err := godotenv.Load()
+	if err != nil {
+		log.Printf("Erro ao carregar o arquivo .env: %v\n", err)
+	}
+
+	dbUser := os.Getenv("DB_USER")
+	dbPassword := os.Getenv("DB_PASSWORD")
+	dbHost := os.Getenv("DB_HOST")
+	dbPort := os.Getenv("DB_PORT")
+	dbName := os.Getenv("DB_NAME")
 
 	if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbName == "" {
 		return nil, fmt.Errorf("uma ou mais variáveis de ambiente não estão definidas")

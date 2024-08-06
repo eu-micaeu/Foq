@@ -1,10 +1,8 @@
 header {
 
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     background-color: #202020;
-    color: #fff;
-    padding: 10px 0;
     text-align: center;
 
 }
@@ -17,7 +15,7 @@ header p {
     position: absolute;
     margin-left: 50px;
     left: 10;
-    top: 5;
+    color: #fff;
     
 }
 
@@ -32,7 +30,7 @@ header #btLogin {
     cursor: pointer;
     position: absolute;
     right: 30px;
-    top: 30px;
+    top: 20px;
     padding: 20px;
     display: flex;
     align-items: center;
@@ -60,7 +58,7 @@ header #btLogout {
     cursor: pointer;
     position: absolute;
     right: 30px;
-    top: 30px;
+    top: 20px;
     padding: 20px;
     display: none;
     align-items: center;
