@@ -1,5 +1,3 @@
 .env
 script.sql
-go.mod
-go.sum
 main.exe
