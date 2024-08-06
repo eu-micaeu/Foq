@@ -15,8 +15,6 @@ function getWeather() {
                         if (data.main) {
                             const temperature = (data.main.temp).toFixed(1) + '°C';
                             document.getElementById('temperature').innerText = temperature;
-                            // Certifique-se de que 'iconUrl' esteja definido corretamente
-                            document.getElementById('icon').src = iconUrl;
                         } else {
                             console.error('Dados de clima não encontrados:', data);
                         }

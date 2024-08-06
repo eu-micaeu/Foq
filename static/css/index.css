@@ -29,24 +29,22 @@ body {
 
 }
 
-#btFoqMode {
+.btClose{
 
-    font-family: 'Quicksand', sans-serif;
     background-color: #202020;
-    color: #fff;
+    color: #ff0000;
     border: none;
-    padding: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 20px 50px;
+    font-size: 25px;
+    padding: 0;
 
 }
 
-#btFoqMode:hover {
+.btClose:hover{
 
     color: #505050;
     cursor: pointer;
@@ -54,14 +52,14 @@ body {
 }
 
 #overlay {
-    display: none; /* ou block, conforme necessário para testes */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.795);
-    z-index: 1; /* Certifique-se de que seja superior ao z-index do footer */
+    z-index: 1;
     animation: aparecer 0.5s;
 }
 
