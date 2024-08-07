@@ -17,7 +17,9 @@ One of the main objectives of "Foq" is to make interaction as simple as possible
 ## Commands to Start the Program on Your Personal Machine:
 
 ```
-go build ./cmd/main.go
+swag init
+
+go build main.go
 
 ./main
 ```
