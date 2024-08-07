@@ -11,7 +11,6 @@ function getWeather() {
                 fetch(apiUrl)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data); // Log da resposta completa da API
                         if (data.main) {
                             const temperature = (data.main.temp).toFixed(1) + '°C';
                             document.getElementById('temperature').innerText = temperature;

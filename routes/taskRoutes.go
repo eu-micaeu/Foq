@@ -19,6 +19,4 @@ func TaskRoutes(r *gin.Engine, db *sql.DB) {
 
 	r.PUT("/task/:id", taskHandler.Atualizar(db))
 
-	r.PUT("/taskStatus/:id", taskHandler.AtualizarStatus(db))
-
 }

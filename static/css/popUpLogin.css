@@ -9,8 +9,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #202020;
-    width: 500px;
-    height: 500px;
+    width: 90vw;
+    height: 90vh;
     border-radius: 10px;
     animation: aparecer 0.5s;
 
@@ -39,15 +39,15 @@
 
     color: #ffffff;
     font-size: 1.1em;
-    width: 216px;
+    width: 80vw;
 
 }
 
 #popUpLogin form input {
 
-    width: 200px;
+    width: 80vw;
     height: 15px;
-    padding: 8px;
+    padding: 8px 0;
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #000;
@@ -75,7 +75,7 @@
     cursor: pointer;
     margin-top: 10px;
     height: 30px;
-    width: 216px;
+    width: 80vw;
 
 }
 
@@ -97,7 +97,7 @@
     cursor: pointer;
     margin-top: 10px;
     height: 30px;
-    width: 216px;
+    width: 80vw;
 
 }
 

@@ -3,20 +3,16 @@
 #popUpTask {
 
     display: none;
-
-    /* Centralizar o Pop Up */
-
     position: fixed;
     z-index: 2;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #202020;
-    width: 500px;
-    height: 500px;
+    width: 90vw;
+    height: 90vh;
     border-radius: 10px;
     padding: 10px;
-
     animation: aparecer 0.5s;
 
 }
@@ -37,15 +33,15 @@
 
     color: #ffffff;
     font-size: 1.1em;
-    width: 416px;
+    width: 80vw;
 
 }
 
 #popUpTask form input {
 
-    width: 400px;
+    width: 80vw;
     height: 15px;
-    padding: 8px;
+    padding: 8px 0;
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #ffffff;
@@ -63,9 +59,9 @@
 
 #popUpTask form textarea {
 
-    width: 400px;
+    width: 80vw;
     height: 300px;
-    padding: 8px;
+    padding: 8px 0;
     font-size: 20px;
     border-radius: 5px;
     margin: 10px 0;
@@ -83,12 +79,13 @@
 
 }
 
-#popUpTask form #statsBar {
+#popUpTask form #taskStatus {
 
     margin: 10px;
-    width: 84%;
-    height: 5px;
+    width: 80vw;
+    height: 30px;
     border-radius: 10px;
+    cursor: pointer;
 
 }
 
@@ -103,7 +100,7 @@
     cursor: pointer;
     margin: 10px 0;
     height: 30px;
-    width: 418px;
+    width: 80vw;
 
 }
 

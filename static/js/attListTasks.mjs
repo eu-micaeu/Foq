@@ -2,7 +2,6 @@ import { getCookie } from './getCookie.mjs';
 import { viewPopUpTask } from './popUpTask.mjs';
 
 // Função para atualizar a lista de tarefas
-
 export function attListTasks() {
 
     fetch('/logged', {
@@ -53,36 +52,18 @@ export function attListTasks() {
                         var taskTitle = document.createElement("p");
 
                         var statsBar = document.createElement("div");
+
                         statsBar.id = "statsBar";
 
-                        if (task.status === "done") {
-                            statsBar.style.backgroundColor = "green";
-                        } else if (task.status === "pending") {
-                            statsBar.style.backgroundColor = "yellow";
-                        }
+                        if (task.status == "done") {
 
-                        statsBar.addEventListener("click", () => {
-                            fetch('/taskStatus/' + task.task_id, {
-                                method: 'PUT',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({
-                                    status: task.status === "done" ? "pending" : "done"
-                                })
-                            })
-                                .then(response => {
-                                    if (response.ok) {
-                                        task.status = task.status === "done" ? "pending" : "done";
-                                        if (task.status === "done") {
-                                            statsBar.style.backgroundColor = "green";
-                                        } else if (task.status === "pending") {
-                                            statsBar.style.backgroundColor = "yellow";
-                                        }
-                                    }
-                                    return response.json();
-                                })
-                        });
+                            statsBar.style.backgroundColor = "green";
+
+                        } else if (task.status == "pending") {
+
+                            statsBar.style.backgroundColor = "yellow";
+                            
+                        }
 
                         var btRemove = document.createElement("button");
 
@@ -106,22 +87,19 @@ export function attListTasks() {
                         });
                     
                         taskTitle.innerHTML = task.title;
-                        taskTitle.style.cursor = "pointer";
-                        taskTitle.style.width = "200px";
 
-                        taskTitle.addEventListener("click", () => viewPopUpTask(task));
-                        
+                        taskDiv.addEventListener("click", () => viewPopUpTask(task));
                         taskDiv.classList.add("task");
-
                         taskDiv.appendChild(taskTitle);
                         taskDiv.appendChild(statsBar);
                         taskDiv.appendChild(btRemove);
+
                         tasksList.appendChild(taskDiv);
+
                     });
 
-                    ///////////////////////////////////////////////////////
-
                 })
+
         })
 
 }

@@ -4,17 +4,19 @@ header {
     height: 100px;
     background-color: #202020;
     text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
 }
+
 
 header p {
 
     font-size: 1.5em;
     cursor: default;
     user-select: none;
-    position: absolute;
     margin-left: 50px;
-    left: 10;
     color: #fff;
     
 }
@@ -28,9 +30,6 @@ header #btLogin {
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
-    position: absolute;
-    right: 30px;
-    top: 20px;
     padding: 20px;
     display: flex;
     align-items: center;
@@ -56,9 +55,6 @@ header #btLogout {
     height: 30px;
     border-radius: 5px;
     cursor: pointer;
-    position: absolute;
-    right: 30px;
-    top: 20px;
     padding: 20px;
     display: none;
     align-items: center;
@@ -72,17 +68,5 @@ header #btLogout:hover {
     background-color: #202020;
     color: #850000;
     cursor: pointer;
-
-}
-
-/* Mobile */
-
-@media screen and (max-width: 600px) {
-
-    header {
-
-        height: 12vh;
-    
-    }
 
 }

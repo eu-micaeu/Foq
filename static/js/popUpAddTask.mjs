@@ -54,6 +54,22 @@ document.getElementById("btSubmitAddTask").addEventListener("click", function (e
 
             userId = data.user.user_id;
 
+            if (taskTitle == '' || taskDescription == '') {
+
+                var toastRed = document.getElementById("toastRed")
+        
+                toastRed.style.display = "block";
+        
+                setTimeout(function(){
+        
+                    toastRed.style.display = "none";
+                    
+                }, 2000);
+        
+                return;
+        
+            }
+
             fetch('/task', {
                 method: 'POST',
                 headers: {

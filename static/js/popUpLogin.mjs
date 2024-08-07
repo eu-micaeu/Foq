@@ -165,8 +165,8 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                 var taskTitle = document.createElement("p");
 
                                 var statsBar = document.createElement("div");
+
                                 statsBar.id = "statsBar";
-                                statsBar.title = "Change status";
 
                                 if (task.status === "done") {
 
@@ -177,29 +177,6 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                     statsBar.style.backgroundColor = "yellow";
 
                                 }
-
-                                statsBar.addEventListener("click", () => {
-                                    fetch('/taskStatus/' + task.task_id, {
-                                        method: 'PUT',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        },
-                                        body: JSON.stringify({
-                                            status: task.status === "done" ? "pending" : "done"
-                                        })
-                                    })
-                                        .then(response => {
-                                            if (response.ok) {
-                                                task.status = task.status === "done" ? "pending" : "done";
-                                                if (task.status === "done") {
-                                                    statsBar.style.backgroundColor = "green";
-                                                } else if (task.status === "pending") {
-                                                    statsBar.style.backgroundColor = "yellow";
-                                                }
-                                            }
-                                            return response.json();
-                                        })
-                                });
 
                                 taskDiv.classList.add("task");
 

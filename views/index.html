@@ -8,7 +8,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/index/index.css">
 
     <title>Foq!</title>
 
@@ -176,6 +176,8 @@
 
             <textarea id="taskDescription" required></textarea>
 
+            <div id="taskStatus"></div>
+
             <button type="button" id="btUpdateTask" title="Update task">Update</button>
 
         </form>
@@ -192,11 +194,11 @@
 
             <label for="addtaskTitle">Title:</label>
 
-            <input for="addtaskTitle" id="addtaskTitle" type="text">
+            <input for="addtaskTitle" id="addtaskTitle" type="text" required>
 
             <label for="addtaskDescription">Description:</label>
 
-            <textarea for="addtaskDescription" id="addtaskDescription" type="text"></textarea>
+            <textarea for="addtaskDescription" id="addtaskDescription" type="text" required></textarea>
 
             <button type="button" id="btSubmitAddTask" title="Submit task">Submit</button>
 
@@ -236,7 +238,7 @@
     <script src="../static/js/popUpAddTask.mjs" type="module"></script>
     <script src="../static/js/btLogout.mjs" type="module"></script>
     <script src="../static/js/overlay.mjs" type="module"></script>
-    <script src="../static/js/index.mjs" type="module"></script>
+    <script src="../static/js/index/index.mjs" type="module"></script>
 
 </body>
 

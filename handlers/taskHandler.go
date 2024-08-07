@@ -8,12 +8,14 @@ import (
 )
 
 type Task struct {
+
 	Task_ID     int       `json:"task_id"`
 	User_ID     int       `json:"user_id"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Status      string    `json:"status"`
 	CreatedAt   time.Time `json:"created_at"`
+	
 }
 
 // Função com finalidade de resgatar todas as tarefas do usuário.
@@ -130,40 +132,7 @@ func (t *Task) Atualizar(db *sql.DB) gin.HandlerFunc {
 
 		}
 
-		_, err := db.Exec("UPDATE tasks SET title = $1, description = $2 WHERE task_id = $3", task.Title, task.Description, id)
-
-		if err != nil {
-
-			c.JSON(500, gin.H{"message": "Erro ao atualizar task"})
-
-			return
-
-		}
-
-		c.JSON(200, gin.H{"message": "Task atualizada com sucesso!"})
-
-	}
-
-}
-
-// Função com finalidade de atualizar um status de uma task no sistema.
-func (t *Task) AtualizarStatus(db *sql.DB) gin.HandlerFunc {
-
-	return func(c *gin.Context) {
-
-		id := c.Param("id")
-
-		var task Task
-
-		if err := c.BindJSON(&task); err != nil {
-
-			c.JSON(400, gin.H{"message": "Erro ao atualizar task"})
-
-			return
-
-		}
-
-		_, err := db.Exec("UPDATE tasks SET status = $1 WHERE task_id = $2", task.Status, id)
+		_, err := db.Exec("UPDATE tasks SET title = $1, description = $2, status = $3 WHERE task_id = $4", task.Title, task.Description, task.Status ,id)
 
 		if err != nil {
 

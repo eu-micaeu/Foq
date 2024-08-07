@@ -23,6 +23,7 @@
     border-bottom: 1px solid #000;
     transition: 0.5s ease;
     margin: 5px;
+    cursor: pointer;
 
 }
 
@@ -38,7 +39,6 @@
     margin: 10px;
     height: 15px;
     border-radius: 10px;
-    cursor: pointer;
 
 }
 

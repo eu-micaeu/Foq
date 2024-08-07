@@ -1,5 +1,5 @@
-import { getCookie } from './getCookie.mjs';
-import { viewPopUpTask } from './popUpTask.mjs';
+import { getCookie } from '../getCookie.mjs';
+import { viewPopUpTask } from '../popUpTask.mjs';
 
 // Função DOM que é executada quando o documento HTML é carregado
 document.addEventListener('DOMContentLoaded', function () {
@@ -90,61 +90,18 @@ document.addEventListener('DOMContentLoaded', function () {
                         var taskTitle = document.createElement("p");
 
                         var statsBar = document.createElement("div");
-                        statsBar.id = "statsBar";
-                        statsBar.title = "Change status";
 
-                        if (task.status === "done") {
+                        statsBar.id = "statsBar";
+
+                        if (task.status == "done") {
 
                             statsBar.style.backgroundColor = "green";
 
-                        } else if (task.status === "pending") {
+                        } else if (task.status == "pending") {
 
                             statsBar.style.backgroundColor = "yellow";
 
                         }
-
-                        statsBar.addEventListener("click", () => {
-
-                            fetch('/taskStatus/' + task.task_id, {
-
-                                method: 'PUT',
-
-                                headers: {
-
-                                    'Content-Type': 'application/json'
-
-                                },
-
-                                body: JSON.stringify({
-
-                                    status: task.status === "done" ? "pending" : "done"
-
-                                })
-
-                            })
-                                .then(response => {
-
-                                    if (response.ok) {
-
-                                        task.status = task.status === "done" ? "pending" : "done";
-
-                                        if (task.status === "done") {
-
-                                            statsBar.style.backgroundColor = "green";
-
-                                        } else if (task.status === "pending") {
-
-                                            statsBar.style.backgroundColor = "yellow";
-
-                                        }
-
-                                    }
-
-                                    return response.json();
-
-                                })
-
-                        });
 
                         var btRemove = document.createElement("button");
 
@@ -184,18 +141,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         taskTitle.innerHTML = task.title;
 
-                        taskTitle.style.cursor = "pointer";
-
-                        taskTitle.style.width = "200px";
-
-                        taskTitle.addEventListener("click", () => viewPopUpTask(task));
-
+                        taskDiv.addEventListener("click", () => viewPopUpTask(task));
                         taskDiv.classList.add("task");
-
                         taskDiv.appendChild(taskTitle);
-
                         taskDiv.appendChild(statsBar);
-
                         taskDiv.appendChild(btRemove);
 
                         tasksList.appendChild(taskDiv);
