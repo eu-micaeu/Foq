@@ -22,7 +22,17 @@ type User struct {
 
 }
 
-// Função com finalidade de login do usuário.
+// Entrar godoc
+// @Summary Login
+// @Description Login with username and password
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param user body User true "User data"
+// @Success 200 {object} ErrorResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /login [post]
 func (u *User) Entrar(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
@@ -82,7 +92,17 @@ func (u *User) Entrar(db *sql.DB) gin.HandlerFunc {
 
 }
 
-// Função com finalidade de registrar um usuário no sistema.
+// Registrar godoc
+// @Summary Register
+// @Description Register a new user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param user body User true "User data"
+// @Success 200 {object} ErrorResponse
+// @Failure 400 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /register [post]
 func (u *User) Registrar(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
@@ -113,7 +133,15 @@ func (u *User) Registrar(db *sql.DB) gin.HandlerFunc {
 
 }
 
-// Função com finalidade de login do usuário.
+// Sair godoc
+// @Summary Logout
+// @Description Logout
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 {object} ErrorResponse
+// @Failure 401 {object} ErrorResponse
+// @Router /logout [post]
 func (u *User) Sair(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
@@ -159,7 +187,16 @@ func (u *User) Sair(db *sql.DB) gin.HandlerFunc {
 
 }
 
-// Função para verificar se o usuário está logado.
+// Logado godoc
+// @Summary Get user
+// @Description Get user data
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 {object} User
+// @Failure 401 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /user [post]
 func (u *User) Logado(db *sql.DB) gin.HandlerFunc {
 
 	return func(c *gin.Context) {
