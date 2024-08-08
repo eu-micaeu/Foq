@@ -38,31 +38,31 @@
 }
 
 #popUpTask form input {
-
     width: 80vw;
-    height: 15px;
-    padding: 8px 0;
-    font-size: 20px;
+    height: 2em; 
+    padding: 0.5em; 
+    font-size: 1.25em; 
     border-radius: 5px;
     border: 1px solid #ffffff;
     background-color: transparent;
     color: #fff;
     margin: 10px 0;
-
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 #popUpTask form input:focus {
-
-    outline: none;
-
+    border-color: #000000; 
+    outline: none; 
 }
+
 
 #popUpTask form textarea {
 
     width: 80vw;
-    height: 300px;
-    padding: 8px 0;
-    font-size: 20px;
+    height: 50vh;
+    padding: 0.5em; 
+    font-size: 1.25em; 
     border-radius: 5px;
     margin: 10px 0;
     font-weight: 600;
@@ -70,12 +70,15 @@
     background-color: transparent;
     color: #fff;
     font-family: 'Quicksand', sans-serif;
+    box-sizing: border-box; 
+    transition: border-color 0.3s, box-shadow 0.3s;
 
 }
 
 #popUpTask form textarea:focus {
 
-    outline: none;
+    border-color: #000000; 
+    outline: none; 
 
 }
 

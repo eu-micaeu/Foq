@@ -64,22 +64,42 @@ export function viewPopUpTask(task) {
                 status: taskStatus.value
             })
         })
+        
         .then(response => {
+
             if (response.ok) {
+
                 attListTasks();
-                popUpTask.style.display = "none";
-                var toastBlue = document.getElementById("toastBlue");
-                toastBlue.style.display = "block";
+
                 setTimeout(function () {
+
+                    popUpTask.style.display = "none";
+
+                    var toastBlue = document.getElementById("toastBlue");
+    
+                    toastBlue.style.display = "block";
+
+                }, 1000);
+
+                setTimeout(function () {
+
                     overlay.style.display = "none";
+
                     toastBlue.style.display = "none";
+
                 }, 2000);
+
             } else {
+
                 alert("Erro ao atualizar a task!");
+
             }
+
         });
+
     }
 
     // Add event listener
     btUpdateTask.addEventListener("click", updateTask);
+
 }
