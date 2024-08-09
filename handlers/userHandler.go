@@ -247,7 +247,7 @@ func (u *User) Logado(db *sql.DB) gin.HandlerFunc {
 // @Success 200 {object} ErrorResponse
 // @Failure 401 {object} ErrorResponse
 // @Failure 404 {object} ErrorResponse
-// @Router /delete [post]
+// @Router /delete [delete]
 func (u *User) Deletar(db *sql.DB) gin.HandlerFunc {
 	
 	return func(c *gin.Context) {
