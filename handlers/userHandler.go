@@ -1,13 +1,12 @@
 package handlers
 
 import (
-
 	"database/sql"
+	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-
 )
 
 type User struct {
@@ -118,6 +117,8 @@ func (u *User) Registrar(db *sql.DB) gin.HandlerFunc {
 		}
 
 		_, err := db.Exec("INSERT INTO users (username, email, password, full_name, user_ip, created_at) VALUES ($1, $2, $3, $4, $5, $6)", newUser.Username, newUser.Email, newUser.Password, newUser.FullName, c.ClientIP(), time.Now())
+
+		fmt.Println(newUser.Username, newUser.Email, newUser.Password, newUser.FullName, c.ClientIP(), time.Now())
 
 		if err != nil {
 
@@ -232,6 +233,70 @@ func (u *User) Logado(db *sql.DB) gin.HandlerFunc {
 		}
 
 		c.JSON(200, gin.H{"message": "Usuário logado", "user": user})
+
+	}
+
+}
+
+// Deletar godoc
+// @Summary Delete user
+// @Description Delete user
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Success 200 {object} ErrorResponse
+// @Failure 401 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Router /delete [post]
+func (u *User) Deletar(db *sql.DB) gin.HandlerFunc {
+	
+	return func(c *gin.Context) {
+
+		// Lendo o atual token
+
+		token := c.Request.Header.Get("token")
+
+		// Verificando se o token é válido
+
+		userID, err := u.ValidarOToken(token)
+
+		if err != nil {
+
+			c.JSON(401, gin.H{"message": "Token inválido"})
+
+			return
+
+		}
+
+		_, err = db.Exec("DELETE FROM users WHERE user_id = $1", userID)
+
+		if err != nil {
+
+			c.JSON(404, gin.H{"message": "Usuário não encontrado"})
+
+			return
+
+		}
+
+		cookie := &http.Cookie{
+
+			Name: "token",
+
+			Value: "",
+
+			Expires: time.Unix(0, 0),
+
+			HttpOnly: true,
+
+			Secure: true,
+
+			SameSite: http.SameSiteStrictMode,
+
+		}
+
+		http.SetCookie(c.Writer, cookie)
+
+		c.JSON(200, gin.H{"message": "Usuário deletado com sucesso!"})
 
 	}
 

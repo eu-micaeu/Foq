@@ -120,6 +120,10 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
 
                         btLogin.style.display = "none";
 
+                        var btDeleteAccount = document.getElementById("btDeleteAccount");
+
+                        btDeleteAccount.style.display = "flex";
+
                         var btLogout = document.getElementById("btLogout");
 
                         btLogout.style.display = "flex";
@@ -206,8 +210,6 @@ document.getElementById("btSubmitLogin").addEventListener("click", function (eve
                                 taskDiv.appendChild(btRemove);
                                 tasksList.appendChild(taskDiv);
                             });
-
-                            ///////////////////////////////////////////////////////
 
                         })
                 })

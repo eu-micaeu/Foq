@@ -25,7 +25,25 @@ body {
     display: flex;
     flex-direction: column;
     user-select: none;
-    animation: aparecer 3s;
+    animation: aparecer 1s;
+
+}
+
+#btDeleteAccount{
+
+    background-color: transparent;
+    color: #ff0000;
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+    margin: 20px 50px;
+    padding: 0;
+
+}
+
+#btDeleteAccount:hover{
+
+    color: #505050;
+    cursor: pointer;
 
 }
 

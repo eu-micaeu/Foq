@@ -4,6 +4,38 @@ import { viewPopUpTask } from '../popUpTask.mjs';
 // Função DOM que é executada quando o documento HTML é carregado
 document.addEventListener('DOMContentLoaded', function () {
 
+    var btDeleteAccount = document.getElementById("btDeleteAccount");
+
+    btDeleteAccount.addEventListener("click", function () {
+
+        fetch('/delete', {
+
+            method: 'DELETE',
+
+            headers: {
+
+                'Content-Type': 'application/json',
+
+                'token': getCookie("token")
+
+            },
+
+        })
+
+            .then(response => {
+
+                if (response.ok) {
+
+                    window.location.href = "/";
+
+                }
+
+                return response.json();
+
+            })
+
+    });
+
     var btCloseElements = document.getElementsByClassName("btClose");
 
     for (var i = 0; i < btCloseElements.length; i++) {
@@ -16,143 +48,164 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Se o token existir
+    if (getCookie("token")) {
 
-    fetch('/logged', {
+        fetch('/logged', {
 
-        method: 'POST',
+            method: 'POST',
 
-        headers: {
+            headers: {
 
-            'Content-Type': 'application/json',
+                'Content-Type': 'application/json',
 
-            'token': getCookie("token")
+                'token': getCookie("token")
 
-        },
-
-    })
-
-        .then(response => {
-
-            if (response.ok) {
-
-                var btLogin = document.getElementById("btLogin");
-
-                btLogin.style.display = "none";
-
-                var btLogout = document.getElementById("btLogout");
-
-                btLogout.style.display = "flex";
-
-                var btAdicionarTask = document.getElementById("btAdicionarTask");
-
-                btAdicionarTask.style.display = "flex";
-
-            }
-
-            return response.json();
+            },
 
         })
 
-        .then(data => {
+            .then(response => {
 
-            fetch('/tasks/' + data.user.user_id, {
+                if (response.ok) {
 
-                method: 'GET',
+                    var btLogin = document.getElementById("btLogin");
 
-                headers: {
+                    btLogin.style.display = "none";
 
-                    'Content-Type': 'application/json',
+                    var btLogout = document.getElementById("btLogout");
 
-                },
+                    btLogout.style.display = "flex";
+
+                    var btAdicionarTask = document.getElementById("btAdicionarTask");
+
+                    btAdicionarTask.style.display = "flex";
+
+                }
+
+                return response.json();
 
             })
 
-                .then(response => {
+            .then(data => {
 
-                    return response.json();
+                fetch('/tasks/' + data.user.user_id, {
+
+                    method: 'GET',
+
+                    headers: {
+
+                        'Content-Type': 'application/json',
+
+                    },
 
                 })
 
-                .then(data => {
+                    .then(response => {
 
-                    var tasks = data.tasks;
+                        return response.json();
 
-                    var tasksList = document.getElementById("listTasks");
+                    })
 
-                    tasksList.innerHTML = "";
+                    .then(data => {
 
-                    // Bloco de código que cria um elemento HTML para cada tarefa
+                        var tasks = data.tasks;
 
-                    tasks.forEach(task => {
+                        var tasksList = document.getElementById("listTasks");
 
-                        var taskDiv = document.createElement("div");
+                        tasksList.innerHTML = "";
 
-                        var taskTitle = document.createElement("p");
+                        // Bloco de código que cria um elemento HTML para cada tarefa
 
-                        var statsBar = document.createElement("div");
+                        tasks.forEach(task => {
 
-                        statsBar.id = "statsBar";
+                            var taskDiv = document.createElement("div");
 
-                        if (task.status == "done") {
+                            var taskTitle = document.createElement("p");
 
-                            statsBar.style.backgroundColor = "green";
+                            var statsBar = document.createElement("div");
 
-                        } else if (task.status == "pending") {
+                            statsBar.id = "statsBar";
 
-                            statsBar.style.backgroundColor = "yellow";
+                            if (task.status == "done") {
 
-                        }
+                                statsBar.style.backgroundColor = "green";
 
-                        var btRemove = document.createElement("button");
+                            } else if (task.status == "pending") {
 
-                        btRemove.innerHTML = "X";
+                                statsBar.style.backgroundColor = "yellow";
 
-                        btRemove.id = "btRemove";
+                            }
 
-                        btRemove.title = "Delete task";
+                            var btRemove = document.createElement("button");
 
-                        btRemove.addEventListener("click", function () {
+                            btRemove.innerHTML = "X";
 
-                            fetch('/task/' + task.task_id, {
+                            btRemove.id = "btRemove";
 
-                                method: 'DELETE',
+                            btRemove.title = "Delete task";
 
-                                headers: {
+                            btRemove.addEventListener("click", function () {
 
-                                    'Content-Type': 'application/json'
+                                fetch('/task/' + task.task_id, {
 
-                                },
+                                    method: 'DELETE',
 
-                            })
+                                    headers: {
 
-                                .then(response => {
+                                        'Content-Type': 'application/json'
 
-                                    if (response.ok) {
-
-                                        tasksList.removeChild(taskDiv);
-
-                                    }
-
-                                    return response.json();
+                                    },
 
                                 })
 
+                                    .then(response => {
+
+                                        if (response.ok) {
+
+                                            tasksList.removeChild(taskDiv);
+
+                                        }
+
+                                        return response.json();
+
+                                    })
+
+                            });
+
+                            taskTitle.innerHTML = task.title;
+
+                            taskDiv.addEventListener("click", () => viewPopUpTask(task));
+                            taskDiv.classList.add("task");
+                            taskDiv.appendChild(taskTitle);
+                            taskDiv.appendChild(statsBar);
+                            taskDiv.appendChild(btRemove);
+
+                            tasksList.appendChild(taskDiv);
+
                         });
 
-                        taskTitle.innerHTML = task.title;
+                    })
 
-                        taskDiv.addEventListener("click", () => viewPopUpTask(task));
-                        taskDiv.classList.add("task");
-                        taskDiv.appendChild(taskTitle);
-                        taskDiv.appendChild(statsBar);
-                        taskDiv.appendChild(btRemove);
+            })
 
-                        tasksList.appendChild(taskDiv);
 
-                    });
+    } else {
 
-                })
+        var btLogin = document.getElementById("btLogin");
 
-        })
+        btLogin.style.display = "flex";
+
+        btDeleteAccount.style.display = "none";
+
+        var btLogout = document.getElementById("btLogout");
+
+        btLogout.style.display = "none";
+
+        var btAdicionarTask = document.getElementById("btAdicionarTask");
+
+        btAdicionarTask.style.display = "none";
+
+    }
 
 });

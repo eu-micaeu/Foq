@@ -23,6 +23,8 @@ document.getElementById("btLogout").addEventListener("click", function () {
         })
             .then(response => {
                 if (response.ok) {
+                    var btDeleteAccount = document.getElementById("btDeleteAccount");
+                    btDeleteAccount.style.display = "none";
                     var btLogin = document.getElementById("btLogin");
                     btLogin.style.display = "flex";
                     var btLogout = document.getElementById("btLogout");

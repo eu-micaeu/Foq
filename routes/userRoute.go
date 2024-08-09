@@ -19,4 +19,6 @@ func UserRoutes(r *gin.Engine, db *sql.DB) {
 
 	r.POST("/logged", userHandler.Logado(db))
 
+	r.DELETE("/delete", userHandler.Deletar(db))
+
 }
