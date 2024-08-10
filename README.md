@@ -23,10 +23,5 @@ go build main.go
 
 ./main
 ```
-## Data Models
-
-### Conceptual:
-
-<img src="database/datamodels/CDM.png">
 
 
