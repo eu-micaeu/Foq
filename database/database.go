@@ -28,7 +28,7 @@ func NewDB() (*sql.DB, error) {
 		return nil, fmt.Errorf("uma ou mais variáveis de ambiente não estão definidas")
 	}
 
-	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=require", dbUser, dbPassword, dbHost, dbPort, dbName)
+	dsn := fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable", dbUser, dbPassword, dbHost, dbPort, dbName)
 
 	db, err := sql.Open("postgres", dsn)
 	if err != nil {
