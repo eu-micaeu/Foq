@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/gin-gonic/gin"
-	"github.com/eu-micaeu/Foq/handlers"
+	"foq/handlers"
 )
 
 func TaskRoutes(r *gin.Engine, db *sql.DB) {

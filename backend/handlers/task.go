@@ -16,20 +16,6 @@ type Task struct {
 	CreatedAt   time.Time `json:"created_at"`
 }
 
-type ErrorResponse struct {
-    Message string `json:"message"`
-}
-
-// Listar godoc
-// @Summary List tasks
-// @Description get tasks by user ID
-// @Tags Tasks
-// @Accept json
-// @Produce json
-// @Param id path int true "User ID"
-// @Success 200 {array} Task
-// @Failure 500 {object} ErrorResponse
-// @Router /tasks/{id} [get]
 func (t *Task) Listar(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
@@ -48,17 +34,7 @@ func (t *Task) Listar(db *sql.DB) gin.HandlerFunc {
 	}
 }
 
-// Criar godoc
-// @Summary Create a task
-// @Description Create a new task
-// @Tags Tasks
-// @Accept json
-// @Produce json
-// @Param task body Task true "Task data"
-// @Success 200 {object} Task
-// @Failure 400 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
-// @Router /task [post]
+// Criar cria uma nova task
 func (t *Task) Criar(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var newTask Task
@@ -66,7 +42,7 @@ func (t *Task) Criar(db *sql.DB) gin.HandlerFunc {
 			c.JSON(400, gin.H{"message": "Erro ao criar task"})
 			return
 		}
-		_, err := db.Exec("INSERT INTO tasks (user_id, title, description, status, created_at) VALUES ($1, $2, $3, $4, $5)", newTask.User_ID, newTask.Title, newTask.Description, newTask.Status, time.Now())
+		err := db.QueryRow("INSERT INTO tasks (user_id, title, description, status, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING task_id, user_id, title, description, status, created_at", newTask.User_ID, newTask.Title, newTask.Description, newTask.Status, time.Now()).Scan(&newTask.Task_ID, &newTask.User_ID, &newTask.Title, &newTask.Description, &newTask.Status, &newTask.CreatedAt)
 		if err != nil {
 			c.JSON(500, gin.H{"message": "Erro ao criar task"})
 			return
@@ -75,16 +51,6 @@ func (t *Task) Criar(db *sql.DB) gin.HandlerFunc {
 	}
 }
 
-// Deletar godoc
-// @Summary Delete a task
-// @Description delete a task by task ID
-// @Tags Tasks
-// @Accept json
-// @Produce json
-// @Param id path int true "Task ID"
-// @Success 200 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
-// @Router /task/{id} [delete]
 func (t *Task) Deletar(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
@@ -97,18 +63,6 @@ func (t *Task) Deletar(db *sql.DB) gin.HandlerFunc {
 	}
 }
 
-// Atualizar godoc
-// @Summary Update a task
-// @Description update a task by task ID
-// @Tags Tasks
-// @Accept json
-// @Produce json
-// @Param id path int true "Task ID"
-// @Param task body Task true "Updated Task"
-// @Success 200 {object} ErrorResponse
-// @Failure 400 {object} ErrorResponse
-// @Failure 500 {object} ErrorResponse
-// @Router /task/{id} [put]
 func (t *Task) Atualizar(db *sql.DB) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
