@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { getTasks } from '../../utils/api';
 import './Main.css';
 import { isAuthTokenValid } from '../../utils/cookies';
+import { useAuth } from '../../context/AuthContext';
 
 function Main() {
+  const { isAuthenticated } = useAuth();
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState(null);
 
@@ -16,8 +18,11 @@ function Main() {
         setError('Failed to fetch tasks');
       }
     }
-    fetchTasks();
-  }, []);
+
+    if (isAuthenticated) {
+      fetchTasks();
+    }
+  }, [isAuthenticated]);
 
   const getRandomColor = () => {
     const letters = '0123456789ABCDEF';
@@ -32,7 +37,7 @@ function Main() {
     <main>
       {error && <p>{error}</p>}
       <h1>Tasks</h1>
-      {isAuthTokenValid() ? (
+      {isAuthenticated ? (
         <div className="tasks-container">
           {tasks.length > 0 ? (
             tasks.map((task) => (

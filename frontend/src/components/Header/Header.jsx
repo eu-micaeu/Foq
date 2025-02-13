@@ -4,10 +4,10 @@ import { Button, Dialog, DialogTitle, DialogContent, TextField, DialogActions, I
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from '@mui/icons-material/Close';
-import { login } from '../../utils/api';
-import { isAuthTokenValid, removeAuthTokenFromCookies } from '../../utils/cookies';
+import { useAuth } from '../../context/AuthContext'; // Ajuste o caminho conforme necessário
 
 function Header() {
+  const { isAuthenticated, login, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,41 +21,25 @@ function Header() {
   };
 
   const handleLogin = () => {
-    login(username, password).then(response => {
-      handleClose();
-      window.location.reload();
-    }).catch(error => {
-      console.error(error);
-    });
-  };
-
-  const handleLogout = () => {
-    removeAuthTokenFromCookies();
-    window.location.reload();
+    login(username, password)
+      .then(() => {
+        handleClose();
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
     <header>
       <h1>Foq!</h1>
 
-      {isAuthTokenValid() ? (
-        <IconButton
-          sx={{ color: 'red' }} 
-          aria-label="logout"
-          onClick={() => {
-            handleLogout();
-          }}
-        >
+      {isAuthenticated ? (
+        <IconButton sx={{ color: 'red' }} aria-label="logout" onClick={logout}>
           <LogoutIcon />
         </IconButton>
       ) : (
-        <IconButton
-          color="inherit"
-          aria-label="login"
-          onClick={() => {
-            handleClickOpen();
-          }}
-        >
+        <IconButton color="inherit" aria-label="login" onClick={handleClickOpen}>
           <LoginIcon />
         </IconButton>
       )}

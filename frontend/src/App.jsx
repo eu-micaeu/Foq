@@ -1,22 +1,16 @@
+import React from 'react';
+import { AuthProvider } from './context/AuthContext'; 
 import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-
+import MainContent from './components/Main/Main';
 import './App.css';
 
 function App() {
-
   return (
-
-    <>
-    
+    <AuthProvider>
       <Header />
-
-      <Main />
-
-    </>
-
+      <MainContent />
+    </AuthProvider>
   );
-
 }
 
 export default App;
